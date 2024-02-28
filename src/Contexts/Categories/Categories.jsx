@@ -17,41 +17,20 @@ function Categories() {
     <>
       <SectionHead title={"Categories"}>
         <div className="categ my-5">
-          <Carousel className="mx-5">
-            <CarouselContent className="my-1 flex justify-center items-center">
-              <CarouselItem className="lg:basis-1/6 md:basis-1/4 sm:basis-1/3">
-                <Card className="flex flex-col justify-center hover:bg-[#DB4444] hover:text-white transition-all ease-linear cursor-pointer items-center border border-[#BDBDBD]">
-                  <CardHeader className="font-light text-5xl">
-                    <CiDesktop />
-                  </CardHeader>
-                  <CardContent>
-                    <CardTitle>Electronics</CardTitle>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-              <CarouselItem className="lg:basis-1/6 md:basis-1/4 sm:basis-1/3">
-                <Card className="flex flex-col justify-center hover:bg-[#DB4444] hover:text-white transition-all ease-linear cursor-pointer items-center border border-[#BDBDBD]">
-                  <CardHeader className="font-light text-5xl">
-                    <CiDesktop />
-                  </CardHeader>
-                  <CardContent>
-                    <CardTitle>Electronics</CardTitle>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
-              <CarouselItem className="lg:basis-1/6 md:basis-1/4 sm:basis-1/3">
-                <Card className="flex flex-col justify-center hover:bg-[#DB4444] hover:text-white transition-all ease-linear cursor-pointer items-center border border-[#BDBDBD]">
-                  <CardHeader className="font-light text-5xl">
-                    <CiDesktop />
-                  </CardHeader>
-                  <CardContent>
-                    <CardTitle>Electronics</CardTitle>
-                  </CardContent>
-                </Card>
+          <Carousel className="w-full max-w-full">
+            <CarouselContent>
+              <CarouselItem className="lg:basis-1/5 md:basis-1/4 sm:basis-1/3">
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex aspect-square items-center justify-center p-6">
+                      <span className="text-4xl font-semibold">1</span>
+                    </CardContent>
+                  </Card>
+                </div>
               </CarouselItem>
             </CarouselContent>
-            <CarouselNext />
             <CarouselPrevious />
+            <CarouselNext />
           </Carousel>
         </div>
       </SectionHead>
