@@ -4,6 +4,7 @@ import Featured from "../Featured/Featured";
 import Categories from "@/Contexts/Categories/Categories";
 import BestSelling from "../BestSelling/BestSelling";
 import NewArrival from "../NewArrival/NewArrival";
+import Services from "../Services/Services";
 
 function Home() {
   return (
@@ -13,6 +14,7 @@ function Home() {
       <Categories />
       <BestSelling />
       <NewArrival />
+      <Services />
     </>
   );
 }

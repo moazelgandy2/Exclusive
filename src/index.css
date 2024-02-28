@@ -19,6 +19,11 @@
   transform: translateY(-50%);
   border-radius: 4px;
 }
+.card {
+  background-image: url("../src/assets/images/playstation.png");
+  background-position: center;
+  background-size: cover;
+}
 .active-card {
   @apply text-white bg-[#DB4444];
 }
