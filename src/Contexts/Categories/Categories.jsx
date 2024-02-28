@@ -8,7 +8,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import axios from "axios";
 import { CiDesktop } from "react-icons/ci";
 
 import React, { useEffect, useState } from "react";
@@ -19,7 +18,7 @@ function Categories() {
       <SectionHead title={"Categories"}>
         <div className="categ my-5">
           <Carousel className="mx-5">
-            <CarouselContent className="flex justify-center items-center">
+            <CarouselContent className="my-1 flex justify-center items-center">
               <CarouselItem className="lg:basis-1/6 md:basis-1/4 sm:basis-1/3">
                 <Card className="flex flex-col justify-center hover:bg-[#DB4444] hover:text-white transition-all ease-linear cursor-pointer items-center border border-[#BDBDBD]">
                   <CardHeader className="font-light text-5xl">

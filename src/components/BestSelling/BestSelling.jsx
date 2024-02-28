@@ -21,29 +21,9 @@ function BestSelling() {
         <div className="my-5 px-5">
           <Carousel>
             <CarouselContent>
-              <CarouselItem className="basis-1/5">
+              <CarouselItem className="lg:basis-1/5 md:basis-1/4 sm:basis-1/3 ">
                 <Card className="flex relative flex-col justify-center items-center text-center py-2">
-                  <CardContent className=" h-[150px] bg-[url('https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg')] bg-contain bg-no-repeat bg-center w-3/4"></CardContent>
-                  <CardHeader className="w-full ">
-                    <CardTitle className="flex flex-col gap-2 items-start text-start w-full">
-                      <span className=" font-light text-lg">Jacket</span>
-                      <span className="text-[#DB4444]">$50</span>
-                      <span className="flex text-[#FFAD33] w-full items-center gap-3">
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                        <FaStar />
-                      </span>
-                    </CardTitle>
-                    <Badge className="absolute top-0 end-2" variant="destructive">
-                      Out of stock
-                    </Badge>
-                  </CardHeader>
-                </Card>
-              </CarouselItem>
-              <CarouselItem className="basis-1/5">
-                <Card className="flex relative flex-col justify-center items-center text-center py-2">
-                  <CardContent className=" h-[150px] bg-[url('https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg')] bg-contain bg-no-repeat bg-center w-3/4"></CardContent>
+                  <CardContent className=" h-[150px] bg-[url('https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg')] bg-contain bg-no-repeat bg-center lg:w-3/4 w-full"></CardContent>
                   <CardHeader className="w-full ">
                     <CardTitle className="flex flex-col gap-2 items-start text-start w-full">
                       <span className=" font-light text-lg hover:border-black border-b border-transparent cursor-pointer">
