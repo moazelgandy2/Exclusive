@@ -18,7 +18,7 @@ function Featured() {
   return (
     <>
       <SectionHead title="Featured Products">
-        <div className="products relative">
+        <div className="products relative px-5">
           <Carousel className="my-5">
             <CarouselContent className="ms-2">
               <CarouselItem className="lg:basis-1/5 md:basis-1/3 sm:basis-1/2 rounded-lg p-0 overflow-hidden border border-[#eeecec]">
