@@ -29,12 +29,16 @@ function BestSelling() {
                       <span className=" font-light text-lg hover:border-black border-b border-transparent cursor-pointer">
                         Jacket
                       </span>
-                      <span className="text-[#DB4444]">$50</span>
-                      <span className="flex text-[#FFAD33] w-full items-center gap-3">
+                      <span className="text-[#DB4444]">$ 109.95</span>
+                      <span className="flex text-[#FFAD33] w-full items-center gap-1">
                         <FaStar />
                         <FaStar />
                         <FaStar />
                         <FaStar />
+                        <FaStar />
+                        <span className="text-gray-400 relative top-2 text-[12px] font-light">
+                          (65)
+                        </span>
                       </span>
                     </CardTitle>
                     <Badge className="absolute top-0 end-2" variant="destructive">
