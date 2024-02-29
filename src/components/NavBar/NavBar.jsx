@@ -1,6 +1,7 @@
 import React from "react";
 import { IoHeartOutline } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -43,7 +44,7 @@ function NavBar() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Best Selling</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>Brands</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <NavigationMenuLink>
                       <ul className="w-[350px] p-2 flex flex-col gap-2">
