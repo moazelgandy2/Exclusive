@@ -4,18 +4,22 @@ import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Product from "./components/Product/Product";
+import NotFound from "./components/NotFound/NotFound";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   return (
     <>
-      <NavBar />
       <Router>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </Router>
-      <Footer />
     </>
   );
 }

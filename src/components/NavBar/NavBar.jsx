@@ -12,14 +12,16 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import { Link } from "@radix-ui/react-navigation-menu";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
     <nav className="px-14 py-4 mx-auto border-b border-[#B3B3B3]">
       <ul className="grid grid-cols-12 items-center">
         <li className="logo cursor-pointer lg:col-span-2 md:col-span-2 col-span-6">
-          <h3 className="font-bold text-xl">Exclusive</h3>
+          <Link to="/">
+            <h3 className="font-bold text-xl">Exclusive</h3>
+          </Link>
         </li>
         <li className="lg:col-span-8 md:col-span-8 lg:block md:block hidden">
           <ul className="flex justify-center items-center gap-5">
@@ -57,16 +59,16 @@ function NavBar() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink className="me-3 hover:bg-[#FAFAFA] p-2 rounded-md">
-                    <a href="https://youtube.com" target="_blanck">
+                    <NavigationMenuItem href="https://youtube.com" target="_blanck">
                       LogIn
-                    </a>
+                    </NavigationMenuItem>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink className="hover:bg-[#FAFAFA] p-2 rounded-md">
-                    <a href="https://youtube.com" target="_blanck">
+                    <NavigationMenuItem href="https://youtube.com" target="_blanck">
                       Regiester
-                    </a>
+                    </NavigationMenuItem>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -78,9 +80,9 @@ function NavBar() {
             <i className="cursor-pointer">
               <IoHeartOutline />
             </i>
-            <i className="cursor-pointer">
+            <Link to={"/cart"} className="cursor-pointer">
               <BsCart3 />
-            </i>
+            </Link>
           </div>
         </li>
       </ul>
