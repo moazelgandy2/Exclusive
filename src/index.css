@@ -27,6 +27,19 @@
 .active-card {
   @apply text-white bg-[#DB4444];
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

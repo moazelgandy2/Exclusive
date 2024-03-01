@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+// Import components from
+import SectionHead from "../SectionHead/SectionHead";
 import {
   Carousel,
   CarouselContent,
@@ -6,49 +9,47 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Badge } from "../ui/badge";
-import { FaStar } from "react-icons/fa";
-import { CiHeart } from "react-icons/ci";
-import { FaCartPlus } from "react-icons/fa";
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import SectionHead from "../SectionHead/SectionHead";
+import { useQuery } from "react-query";
+import axios from "axios";
+import ProductCard from "./ProductCard";
+import { Skeleton } from "../ui/skeleton";
+import ProductCardSkelton from "./ProductCardSkelton";
 
 function Featured() {
+  function getProducts() {
+    return axios.get("https://ecommerce.routemisr.com/api/v1/products?limit=10");
+  }
+
+  const { isLoading, data, isError } = useQuery("products", getProducts);
+
   return (
     <>
       <SectionHead title="Featured Products">
         <div className="products relative px-5">
           <Carousel className="my-5">
-            <CarouselContent className="ms-2">
-              <CarouselItem className="lg:basis-1/5 md:basis-1/3 sm:basis-1/2 rounded-lg p-0 overflow-hidden border border-[#eeecec]">
-                <Card className="border-0 shadow-lg relative">
-                  <CardContent className="w-full">
-                    <img
-                      className="w-full"
-                      src="https://ecommerce.routemisr.com/Route-Academy-products/1680403397482-1.jpeg"
-                      alt=""
+            <CarouselContent className="ms-2 gap-3">
+              {isLoading ? (
+                <>
+                  <ProductCardSkelton />
+                  <ProductCardSkelton />
+                  <ProductCardSkelton />
+                </>
+              ) : (
+                data.data.data.map((prod) => {
+                  return (
+                    <ProductCard
+                      key={prod._id}
+                      id={prod._id}
+                      img={prod.imageCover}
+                      title={prod.title}
+                      price={prod.price}
+                      priceDis={prod.price * 1.51}
+                      rating={prod.ratingsAverage}
                     />
-                  </CardContent>
-                  <CardHeader>
-                    <CardTitle>
-                      <span>Women Shawl</span>
-                    </CardTitle>
-                    <Badge
-                      variant="outline"
-                      className="w-[40px] cursor-pointer absolute top-0 end-2 h-[40px] hover:text-red-500 rounded-full bg-transparent"
-                    >
-                      <FaCartPlus className="text-3xl" />
-                    </Badge>
-                    <Badge
-                      className="absolute top-12 end-2 text-center justify-center rounded-full cursor-pointer p-0 h-[40px] w-[40px]"
-                      variant="outline"
-                    >
-                      <CiHeart className="hover:text-red-500 text-2xl font-bold" />
-                    </Badge>
-                  </CardHeader>
-                </Card>
-              </CarouselItem>
+                  );
+                })
+              )}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
