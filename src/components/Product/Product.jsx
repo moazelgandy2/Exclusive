@@ -53,14 +53,15 @@ function Product() {
         <div className="lg:w-[10%] md:w-[10%] col-span-2 items-center flex flex-col gap-2 justify-center ">
           {product.images ? (
             product.images.map((img, i) => (
-              <img
-                key={i}
-                onClick={handleImgClick}
-                className="border cursor-pointer w-full"
-                src={img}
-                alt=""
-                loading="lazy"
-              />
+              <div key={i} className="min-h-[120px]">
+                <img
+                  onClick={handleImgClick}
+                  className="border cursor-pointer w-full"
+                  src={img}
+                  alt={`${product.title} image`}
+                  loading="lazy"
+                />
+              </div>
             ))
           ) : (
             <>
