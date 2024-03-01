@@ -7,6 +7,8 @@ import Product from "./components/Product/Product";
 import NotFound from "./components/NotFound/NotFound";
 import Cart from "./components/Cart/Cart";
 import WishList from "./components/WIshList/WishList";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<WishList />} />

@@ -10,12 +10,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { FaCartPlus } from "react-icons/fa";
 import { Badge } from "../ui/badge";
 import SectionHead from "../SectionHead/SectionHead";
+import { Link } from "react-router-dom";
 
 function WishList() {
   return (
     <>
-      <div className="lg:px-12 md:px-10 sm:px-8 my-16">
-        <SectionHead title={"Wish list"}>
+      <div className="lg:px-12 md:px-10 sm:px-8 my-16 relative">
+        <SectionHead title={"Wish list"} className="my-16">
           <Carousel className="w-4/5 my-5 mx-auto">
             <CarouselContent className="gap-4 mx-2">
               <CarouselItem className="lg:basis-1/4 md:basis-1/3 sm:basis-1/2 rounded-lg p-0 overflow-hidden border border-[#eeecec]">
@@ -45,6 +46,12 @@ function WishList() {
             <CarouselNext />
           </Carousel>
         </SectionHead>
+        <Link
+          to={"/"}
+          className="absolute text-white left-1/2 transform -translate-x-1/2 -bottom-14 p-2 rounded-sm bg-[#DB4444] hover:bg-[#f54a4a]"
+        >
+          Back to home page
+        </Link>
       </div>
     </>
   );

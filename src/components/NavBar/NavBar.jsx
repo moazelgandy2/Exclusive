@@ -59,24 +59,22 @@ function NavBar() {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink className="text-center items-center flex">
-                    <NavigationMenuItem
-                      href="https://youtube.com"
+                    <Link
+                      to={"/login"}
                       className="hover:bg-[#FAFAFA] px-3 py-2 cursor-pointer rounded-sm"
-                      target="_blanck"
                     >
                       LogIn
-                    </NavigationMenuItem>
+                    </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink className="text-center items-center flex">
-                    <NavigationMenuItem
-                      href="https://youtube.com"
+                    <Link
+                      to={"/register"}
                       className="hover:bg-[#FAFAFA] px-3 py-2 cursor-pointer rounded-sm"
-                      target="_blanck"
                     >
                       Register
-                    </NavigationMenuItem>
+                    </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
