@@ -18,8 +18,14 @@ function Footer() {
               <li className="text-[12px] font-light">
                 <p>Get 10% off your first order</p>
               </li>
-              <li className="text-[12px] font-light">
-                <input className="bg-black border-white me-1 border rounded-sm w-[65%] mt-1 text-white p-1 outline-none" />
+              <li className="text-[12px] font-light relative">
+                <label htmlFor="sub" className=" opacity-0 absolute top-0">
+                  Subscribe input
+                </label>
+                <input
+                  id="sub"
+                  className="bg-black border-white me-1 border rounded-sm w-[65%] mt-1 text-white p-1 outline-none"
+                />
                 <button className="bg-white text-black rounded-sm p-1 font-normal w-[30%]">
                   Subscribe
                 </button>
