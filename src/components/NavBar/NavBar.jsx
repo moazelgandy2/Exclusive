@@ -58,16 +58,24 @@ function NavBar() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink className="me-3 hover:bg-[#FAFAFA] p-2 rounded-md">
-                    <NavigationMenuItem href="https://youtube.com" target="_blanck">
+                  <NavigationMenuLink className="text-center items-center flex">
+                    <NavigationMenuItem
+                      href="https://youtube.com"
+                      className="hover:bg-[#FAFAFA] px-3 py-2 cursor-pointer rounded-sm"
+                      target="_blanck"
+                    >
                       LogIn
                     </NavigationMenuItem>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink className="hover:bg-[#FAFAFA] p-2 rounded-md">
-                    <NavigationMenuItem href="https://youtube.com" target="_blanck">
-                      Regiester
+                  <NavigationMenuLink className="text-center items-center flex">
+                    <NavigationMenuItem
+                      href="https://youtube.com"
+                      className="hover:bg-[#FAFAFA] px-3 py-2 cursor-pointer rounded-sm"
+                      target="_blanck"
+                    >
+                      Register
                     </NavigationMenuItem>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -77,9 +85,9 @@ function NavBar() {
         </li>
         <li className="lg:col-span-2 md:col-span-2 col-span-6 items-center">
           <div className="content flex justify-end items-center font-bold text-xl gap-4">
-            <i className="cursor-pointer">
+            <Link to={"/wishlist"} className="cursor-pointer">
               <IoHeartOutline />
-            </i>
+            </Link>
             <Link to={"/cart"} className="cursor-pointer">
               <BsCart3 />
             </Link>

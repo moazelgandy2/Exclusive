@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Product from "./components/Product/Product";
 import NotFound from "./components/NotFound/NotFound";
 import Cart from "./components/Cart/Cart";
+import WishList from "./components/WIshList/WishList";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<WishList />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
