@@ -32,7 +32,6 @@ function Register() {
       .catch((err) => {
         setIsLoading(false);
         setErro(err.response.data.message);
-        console.log(err.response.data.message);
       });
   };
 

@@ -14,9 +14,7 @@ export default function CartContextProvider({ children }) {
         .get("https://ecommerce.routemisr.com/api/v1/cart", {
           headers: { token: token },
         })
-        .catch((err) => {
-          console.log(err);
-        })
+        .catch((err) => {})
         .then();
       data ? setCart(data) : "";
       return data;
@@ -31,13 +29,9 @@ export default function CartContextProvider({ children }) {
         { headers: { token: token } }
       )
       .then((res) => {
-        res?.data ? console.log(res?.data) : "";
-
         getCart();
       })
-      .catch((error) => {
-        console.error("Error adding to cart:", error);
-      });
+      .catch((error) => {});
 
     toast.promise(promise, {
       loading: "Adding to cart...",
@@ -57,12 +51,9 @@ export default function CartContextProvider({ children }) {
         { headers: { token: token } }
       )
       .then((res) => {
-        res?.data ? console.log(res?.data) : "";
         getCart();
       })
-      .catch((error) => {
-        console.error("Error updating cart:", error);
-      });
+      .catch((error) => {});
 
     toast.promise(promise, {
       loading: "Updating cart...",
@@ -80,13 +71,9 @@ export default function CartContextProvider({ children }) {
         { headers: { token: token } }
       )
       .then((res) => {
-        res?.data ? console.log(res?.data) : "";
-
         getCart();
       })
-      .catch((error) => {
-        console.error("Error adding to cart:", error);
-      });
+      .catch((error) => {});
 
     toast.promise(promise, {
       loading: "Removing from cart...",
