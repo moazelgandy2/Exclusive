@@ -16,6 +16,7 @@ import CartContextProvider from "./components/Contexts/CartContext";
 import Category from "./components/Category/Category";
 import Brands from "./components/Brands/Brands";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
+import Account from "./components/Account/Account";
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
                   element={
                     <ProtectedRoutes>
                       <WishList />
+                    </ProtectedRoutes>
+                  }
+                />
+                <Route
+                  path="/account"
+                  element={
+                    <ProtectedRoutes>
+                      <Account />
                     </ProtectedRoutes>
                   }
                 />

@@ -144,7 +144,7 @@ function NavBar() {
 
               <BsCart3 />
             </Link>
-            <Link to={"/cart"} className="cursor-pointer relative">
+            <Link to={"/account"} className="cursor-pointer relative">
               <MdAccountCircle />
             </Link>
           </div>
