@@ -11,6 +11,7 @@ function Register() {
   const { token, setToken } = useContext(TokenContext);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [erro, setErro] = useState(null);
   const submitForm = (values) => {
     setIsLoading(true);
     const options = {
@@ -30,7 +31,8 @@ function Register() {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err);
+        setErro(err.response.data.message);
+        console.log(err.response.data.message);
       });
   };
 
@@ -70,6 +72,7 @@ function Register() {
         <title>Register</title>
         <meta name="description" content="Register page" />
       </Helmet>
+
       <div className="lg:px-12 md:px-10 px-10 grid grid-cols-12 my-16 items-center gap-5">
         <div className="lg:col-span-6 hidden bg-[#CBE4E8] lg:flex items-center  justify-center rounded-sm overflow-hidden">
           <img src={LoginImg} alt="" className="w-4/5 text-center" />
@@ -83,6 +86,7 @@ function Register() {
             className="w-full flex flex-col justify-between items-center gap-5"
             onSubmit={formik.handleSubmit}
           >
+            <span className="text-red-500">{erro}</span>
             <div className="relative w-full lg:w-4/5 md:w-4/5">
               <p className="text-[12px] absolute bottom-10 left-2 z-20 text-red-600 font-semibold">
                 {formik.touched.name && formik.errors.name ? formik.errors.name : ""}
