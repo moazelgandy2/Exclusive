@@ -86,9 +86,7 @@ function Category() {
     }
   }, [categ, navigate]);
 
-  useEffect(() => {
-    console.log(products, outOfStock);
-  }, [products, outOfStock]);
+  useEffect(() => {}, [products, outOfStock]);
 
   return (
     <>
