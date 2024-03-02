@@ -10,12 +10,12 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { Link, useLocation } from "react-router-dom";
 import logout from "../../assets/images/logout.png";
 import { TokenContext } from "../Contexts/Token";
 import { CartContext } from "../Contexts/CartContext";
+import { MdAccountCircle } from "react-icons/md";
 
 function NavBar() {
   const { token, setToken } = useContext(TokenContext);
@@ -143,6 +143,9 @@ function NavBar() {
               )}
 
               <BsCart3 />
+            </Link>
+            <Link to={"/cart"} className="cursor-pointer relative">
+              <MdAccountCircle />
             </Link>
           </div>
         </li>
