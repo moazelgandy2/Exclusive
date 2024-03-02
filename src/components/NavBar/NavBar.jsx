@@ -46,15 +46,30 @@ function NavBar() {
                   <NavigationMenuContent>
                     <NavigationMenuLink>
                       <ul className="w-[350px] p-2 flex flex-col gap-2">
-                        <li className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear">
+                        <Link
+                          to={"/category/women'sClothing"}
+                          className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear"
+                        >
                           Women's Fashion
-                        </li>
-                        <li className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear">
-                          Women's Fashion
-                        </li>
-                        <li className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear">
-                          Women's Fashion
-                        </li>
+                        </Link>
+                        <Link
+                          to={"/category/men'sClothing"}
+                          className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear"
+                        >
+                          Men's Fashion
+                        </Link>
+                        <Link
+                          to={"/category/electronics"}
+                          className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear"
+                        >
+                          Electronics
+                        </Link>
+                        <Link
+                          to={"/category/jewelery"}
+                          className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear"
+                        >
+                          Jewelery
+                        </Link>
                       </ul>
                     </NavigationMenuLink>
                   </NavigationMenuContent>
@@ -64,9 +79,12 @@ function NavBar() {
                   <NavigationMenuContent>
                     <NavigationMenuLink>
                       <ul className="w-[350px] p-2 flex flex-col gap-2">
-                        <li className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear">
+                        <Link
+                          to={"/brands"}
+                          className="hover:bg-[#FAFAFA] p-2 cursor-pointer rounded-sm transition-all ease-linear"
+                        >
                           Explore now
-                        </li>
+                        </Link>
                       </ul>
                     </NavigationMenuLink>{" "}
                   </NavigationMenuContent>

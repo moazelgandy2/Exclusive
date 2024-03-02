@@ -4,6 +4,7 @@ import Ring from "../../assets/images/ring.png";
 import Womens from "../../assets/images/womens.png";
 import PlayStation from "../../assets/images/playstation.png";
 import { MdArrowOutward } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function NewArrival() {
   return (
@@ -21,9 +22,12 @@ function NewArrival() {
                   <p className="text-white text-[10px] font-light ">
                     Discover unique vibes with our featured electronics collections.
                   </p>
-                  <button className="flex items-center text-white mt-2 border-b border-[#9b9999]">
+                  <Link
+                    to={"/category/electronics"}
+                    className="flex items-center w-2/5 lg:w-1/6 text-white mt-2 border-b border-[#9b9999]"
+                  >
                     Shop now <MdArrowOutward />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -35,9 +39,12 @@ function NewArrival() {
                   <p className="text-[12px] font-light">
                     Indulge in our curated women's collection for a distinct style statement
                   </p>
-                  <button className="flex items-center text-white mt-2 border-b border-[#9b9999]">
+                  <Link
+                    to={"/category/women'sClothing"}
+                    className="flex items-center text-white w-2/5 lg:w-1/3 mt-2 border-b border-[#9b9999]"
+                  >
                     Shop now <MdArrowOutward />
-                  </button>
+                  </Link>
                 </div>
               </div>
               <div className="col-span-12 bg-[#131313] rounded-sm lg:h-[280px] self-end relative">
@@ -45,9 +52,12 @@ function NewArrival() {
                 <div className="det absolute bottom-5 left-4">
                   <h2 className="text-white">Jewelry Collection</h2>
                   <p className="text-white text-[12px] font-light">Jewelry Collection</p>
-                  <button className="flex items-center text-white mt-2 border-b border-[#9b9999]">
+                  <Link
+                    to={"/category/jewelery"}
+                    className="flex items-center text-white mt-2 border-b border-[#9b9999]"
+                  >
                     Shop now <MdArrowOutward />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

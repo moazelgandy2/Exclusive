@@ -33,7 +33,7 @@ function WishList() {
     <>
       <div className="lg:px-12 md:px-10 sm:px-8 my-16 relative">
         <SectionHead title={"Wish list"} className="my-16">
-          <Carousel className="w-4/5 my-5 mx-auto">
+          <Carousel className="w-full my-5 mx-auto">
             <CarouselContent className="gap-4 mx-2">
               {wishList.length != 0 ? (
                 wishList.map((prod) => {

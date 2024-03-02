@@ -13,6 +13,8 @@ import TokenContextProvider from "./components/Contexts/Token.jsx";
 import { Toaster } from "@/components/ui/sonner";
 import WishListContextProvider from "./components/Contexts/WishList";
 import CartContextProvider from "./components/Contexts/CartContext";
+import Category from "./components/Category/Category";
+import Brands from "./components/Brands/Brands";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/wishlist" element={<WishList />} />
+                <Route path="/category/:categ" element={<Category />} />
+                <Route path="/brands" element={<Brands />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <Footer />
