@@ -12,6 +12,7 @@ import { WishListContext } from "../Contexts/WishList";
 import { TokenContext } from "../Contexts/Token";
 import { CartContext } from "../Contexts/CartContext";
 import { Helmet } from "react-helmet";
+import { toast } from "sonner";
 
 function Product() {
   const { id } = useParams();
@@ -67,12 +68,14 @@ function Product() {
   };
 
   const handleAddToWishList = async () => {
+    if (!token) return toast.error("You need to login first");
     await addToWishList({ token: token, prodId: id });
     getWishList();
     setAddedToWishList(true);
   };
 
   const handleRemoveFromWishList = async () => {
+    if (!token) return toast.error("You need to login first");
     if (addedToWishList) {
       const promise = await removeFromWishList({ token: token, prodId: id });
       getWishList();
@@ -93,12 +96,14 @@ function Product() {
   };
 
   const handleIncrease = async () => {
+    if (!token) return toast.error("You need to login first");
     setIsLoading(true);
     await addToCart({ token: token, prodId: id });
     setIsLoading(false);
   };
 
   const handleDecrease = async () => {
+    if (!token) return toast.error("You need to login first");
     setIsLoading(true);
     await decreaseCount({ token: token, prodId: id, count: count - 1 });
     setIsLoading(false);

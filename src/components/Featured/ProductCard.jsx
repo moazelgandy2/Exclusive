@@ -11,6 +11,7 @@ import { TokenContext } from "../Contexts/Token";
 import { WishListContext } from "../Contexts/WishList";
 import { FaHeart } from "react-icons/fa";
 import { CartContext } from "../Contexts/CartContext";
+import { toast } from "sonner";
 
 function ProductCard({
   id: id,
@@ -28,18 +29,21 @@ function ProductCard({
   const [addedToWishList, setAddedToWishList] = useState(false);
 
   const handleAddToWishList = async (prodId) => {
+    if (!token) return toast.error("You need to login first");
     await addToWishList({ token: token, prodId: prodId });
     getWishList();
     setAddedToWishList(true);
   };
 
   const handleRemoveFomrWishList = async (prodId) => {
+    if (!token) return toast.error("You need to login first");
     await removeFromWishList({ token: token, prodId: prodId });
     getWishList();
     setAddedToWishList(false);
   };
 
   const handleAddToCart = async (prodId) => {
+    if (!token) return toast.error("You need to login first");
     await addToCart({ token: token, prodId: prodId });
   };
 

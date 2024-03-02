@@ -25,7 +25,7 @@ function App() {
           <WishListContextProvider>
             <CartContextProvider>
               <NavBar />
-              <Toaster position="bottom-center" />
+              <Toaster position="bottom-center" richColors />
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
@@ -39,7 +39,14 @@ function App() {
                     </ProtectedRoutes>
                   }
                 />
-                <Route path="/wishlist" element={<WishList />} />
+                <Route
+                  path="/wishlist"
+                  element={
+                    <ProtectedRoutes>
+                      <WishList />
+                    </ProtectedRoutes>
+                  }
+                />
                 <Route path="/category/:categ" element={<Category />} />
                 <Route path="/brands" element={<Brands />} />
                 <Route path="*" element={<NotFound />} />

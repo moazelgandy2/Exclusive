@@ -10,6 +10,7 @@ import { TokenContext } from "../Contexts/Token";
 import { WishListContext } from "../Contexts/WishList";
 import { FaHeart } from "react-icons/fa";
 import { CartContext } from "../Contexts/CartContext";
+import { toast } from "sonner";
 
 function CategoryCard({
   id: id,
@@ -27,18 +28,22 @@ function CategoryCard({
   const [addedToWishList, setAddedToWishList] = useState(false);
 
   const handleAddToWishList = async (prodId) => {
+    if (!token) return toast.error("You need to login first");
     await addToWishList({ token: token, prodId: prodId });
     getWishList();
     setAddedToWishList(true);
   };
 
   const handleRemoveFomrWishList = async (prodId) => {
+    if (!token) return toast.error("You need to login first");
     await removeFromWishList({ token: token, prodId: prodId });
     getWishList();
     setAddedToWishList(false);
   };
 
   const handleAddToCart = async (prodId) => {
+    if (!token) return toast.error("You need to login first");
+
     await addToCart({ token: token, prodId: prodId });
   };
 
@@ -70,7 +75,7 @@ function CategoryCard({
 
   return (
     <>
-      <Card className="w-full border border-[#eeecec] relative h-[580px] overflow-hidden">
+      <Card className="w-full border border-[#eeecec] relative lg:h-[580px]  overflow-hidden">
         <CardContent className="w-full overflow-hidden min-h-[250px]">
           <img className="w-full" src={img} alt={`${title} image`} loading="lazy" />
         </CardContent>
