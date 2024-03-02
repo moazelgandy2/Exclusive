@@ -15,6 +15,7 @@ import WishListContextProvider from "./components/Contexts/WishList";
 import CartContextProvider from "./components/Contexts/CartContext";
 import Category from "./components/Category/Category";
 import Brands from "./components/Brands/Brands";
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 
 function App() {
   return (
@@ -30,7 +31,14 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/product/:id" element={<Product />} />
-                <Route path="/cart" element={<Cart />} />
+                <Route
+                  path="/cart"
+                  element={
+                    <ProtectedRoutes>
+                      <Cart />
+                    </ProtectedRoutes>
+                  }
+                />
                 <Route path="/wishlist" element={<WishList />} />
                 <Route path="/category/:categ" element={<Category />} />
                 <Route path="/brands" element={<Brands />} />
