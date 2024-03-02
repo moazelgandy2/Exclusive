@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { CartContext } from "../Contexts/CartContext";
 import ProductRow from "./ProductRow";
+import { Helmet } from "react-helmet";
 
 function Cart() {
   const { cart, getCart } = useContext(CartContext);
@@ -33,6 +34,10 @@ function Cart() {
   };
   return (
     <>
+      <Helmet>
+        <title>Cart</title>
+        <meta name="description" content={`Cart page`} />
+      </Helmet>
       <div className="lg:px-12 md:px-12 px-5 my-12">
         <Table>
           <TableCaption>

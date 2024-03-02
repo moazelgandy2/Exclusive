@@ -3,6 +3,7 @@ import { Card, CardHeader } from "../ui/card";
 import SectionHead from "../SectionHead/SectionHead";
 import axios from "axios";
 import { Skeleton } from "../ui/skeleton";
+import { Helmet } from "react-helmet";
 
 function Brands() {
   const [brands, setBrands] = useState([]);
@@ -16,6 +17,10 @@ function Brands() {
   }, []);
   return (
     <>
+      <Helmet>
+        <title>Brands</title>
+        <meta name="description" content={`Brands page`} />
+      </Helmet>
       <SectionHead title={"Brands"}>
         <section className="grid grid-cols-12 items-center px-12 gap-5">
           {loading ? (

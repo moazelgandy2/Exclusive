@@ -6,14 +6,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { FaCartPlus } from "react-icons/fa";
-import { Badge } from "../ui/badge";
+
 import SectionHead from "../SectionHead/SectionHead";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { WishListContext } from "../Contexts/WishList";
 import ProductCard from "../Featured/ProductCard";
+import { Helmet } from "react-helmet";
 
 function WishList() {
   const { wishList, getWishList } = useContext(WishListContext);
@@ -31,6 +30,10 @@ function WishList() {
 
   return (
     <>
+      <Helmet>
+        <title>Wish list</title>
+        <meta name="description" content={`Wish list page`} />
+      </Helmet>
       <div className="lg:px-12 md:px-10 sm:px-8 my-16 relative">
         <SectionHead title={"Wish list"} className="my-16">
           <Carousel className="w-full my-5 mx-auto">

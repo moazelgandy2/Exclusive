@@ -5,10 +5,11 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { TokenContext } from "../Contexts/Token";
+import { Helmet } from "react-helmet";
+
 function Login() {
   const { token, setToken } = React.useContext(TokenContext);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (localStorage.getItem("userToken")) {
       setToken(localStorage.getItem("userToken"));
@@ -57,6 +58,10 @@ function Login() {
 
   return (
     <>
+      <Helmet>
+        <title>Login</title>
+        <meta name="description" content="Login page" />
+      </Helmet>
       <div className="lg:px-12 md:px-10 px-10 grid grid-cols-12 my-16 items-center gap-5">
         <div className="lg:col-span-6 hidden bg-[#CBE4E8] lg:flex  justify-center rounded-sm overflow-hidden">
           <img src={LoginImg} alt="" />

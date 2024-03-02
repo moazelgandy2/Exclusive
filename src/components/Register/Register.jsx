@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { TokenContext } from "../Contexts/Token";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 
 function Register() {
   const { token, setToken } = useContext(TokenContext);
@@ -65,6 +66,10 @@ function Register() {
 
   return (
     <>
+      <Helmet>
+        <title>Register</title>
+        <meta name="description" content="Register page" />
+      </Helmet>
       <div className="lg:px-12 md:px-10 px-10 grid grid-cols-12 my-16 items-center gap-5">
         <div className="lg:col-span-6 hidden bg-[#CBE4E8] lg:flex items-center  justify-center rounded-sm overflow-hidden">
           <img src={LoginImg} alt="" className="w-4/5 text-center" />

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -9,13 +9,11 @@ import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
 import { WishListContext } from "../Contexts/WishList";
-import { toast } from "sonner";
 import { TokenContext } from "../Contexts/Token";
 import { CartContext } from "../Contexts/CartContext";
+import { Helmet } from "react-helmet";
 
 function Product() {
-  const location = useLocation();
-
   const { id } = useParams();
   const [inViewImg, setInViewImg] = useState("");
   const [product, setProduct] = useState({});
@@ -107,6 +105,10 @@ function Product() {
   };
   return (
     <>
+      <Helmet>
+        <title>{product.title}</title>
+        <meta name="description" content={(product.title, `product page`)} />
+      </Helmet>
       <div className="lg:flex md:flex grid grid-cols-12 lg:w-3/4 md:w-3/4 w-full mx-auto lg:gap-2 md:gap-2 gap-2 px-2 my-12">
         <div className="lg:w-[10%] md:w-[10%] col-span-2 items-center flex flex-col gap-2 justify-center ">
           {product.images ? (

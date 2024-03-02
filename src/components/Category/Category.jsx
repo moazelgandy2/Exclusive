@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Card, CardContent, CardDescription, CardFooter, CardTitle, CardHeader } from "../ui/card";
+import { Card, CardContent, CardFooter, CardTitle, CardHeader } from "../ui/card";
 import SectionHead from "../SectionHead/SectionHead";
 import { Badge } from "../ui/badge";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import CategoryCard from "./CategoryCard";
 import CategorySkelton from "./CategorySkelton";
+import { Helmet } from "react-helmet";
 
 function Category() {
   const navigate = useNavigate();
@@ -91,6 +92,10 @@ function Category() {
 
   return (
     <>
+      <Helmet>
+        <title>{categ}</title>
+        <meta name="description" content={(categ, `category page`)} />
+      </Helmet>
       <SectionHead title={categ.toUpperCase()}>
         <section className="relative grid gap-5 grid-cols-12 items-center lg:px-12 md:px-8 px-5 my-12">
           {loading ? (
