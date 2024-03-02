@@ -14,10 +14,7 @@ function BestSelling() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products?limit=12")
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.log(err));
+    axios.get("https://fakestoreapi.com/products?limit=12").then((res) => setProducts(res.data));
   }, []);
 
   return (

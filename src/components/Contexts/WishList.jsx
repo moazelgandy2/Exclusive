@@ -14,10 +14,7 @@ export default function WishListContextProvider({ children }) {
       .get("https://ecommerce.routemisr.com/api/v1/wishlist", {
         headers: { token: token },
       })
-      .catch((err) => {
-        console.log(err);
-      });
-    console.log(data.data);
+      .catch((err) => {});
     setWishList(data.data);
     return data.data;
   };
@@ -29,12 +26,8 @@ export default function WishListContextProvider({ children }) {
         { productId: prodId },
         { headers: { token: token } }
       )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.error("Error adding to wishlist:", error);
-      });
+      .then((res) => {})
+      .catch((error) => {});
 
     toast.promise(promise, {
       loading: "Adding to wishlist...",
