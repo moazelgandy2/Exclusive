@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 
 function SectionHead({ children, title: title }) {
   return (

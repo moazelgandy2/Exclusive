@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-import { CarouselItem, CarouselContent } from "../ui/carousel";
+import { CarouselItem } from "../ui/carousel";
 import { Badge } from "../ui/badge";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { FaCartPlus } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
+import { TokenContext } from "../Contexts/Token";
+import { WishListContext } from "../Contexts/WishList";
+import { FaHeart } from "react-icons/fa";
+import { CartContext } from "../Contexts/CartContext";
 
 function ProductCard({
   id: id,
@@ -17,6 +20,29 @@ function ProductCard({
   price: price,
   priceDis: priceDis,
 }) {
+  const location = useLocation();
+
+  const { token } = useContext(TokenContext);
+  const { wishList, addToWishList, removeFromWishList, getWishList } = useContext(WishListContext);
+  const { addToCart } = useContext(CartContext);
+  const [addedToWishList, setAddedToWishList] = useState(false);
+
+  const handleAddToWishList = async (prodId) => {
+    await addToWishList({ token: token, prodId: prodId });
+    getWishList();
+    setAddedToWishList(true);
+  };
+
+  const handleRemoveFomrWishList = async (prodId) => {
+    await removeFromWishList({ token: token, prodId: prodId });
+    getWishList();
+    setAddedToWishList(false);
+  };
+
+  const handleAddToCart = async (prodId) => {
+    await addToCart({ token: token, prodId: prodId });
+  };
+
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating - fullStars >= 0.5;
@@ -31,6 +57,17 @@ function ProductCard({
 
     return stars;
   };
+
+  useEffect(() => {
+    if (wishList) {
+      const pe = wishList.find((prod) => prod.id === id);
+      if (pe !== undefined) {
+        setAddedToWishList(true);
+      } else {
+        setAddedToWishList(false);
+      }
+    }
+  }, [id, wishList, location.key]);
 
   return (
     <>
@@ -64,17 +101,29 @@ function ProductCard({
               </div>
             </CardTitle>
             <Badge
+              onClick={() => handleAddToCart(id)}
               variant="outline"
               className="w-[40px] cursor-pointer absolute top-0 end-2 h-[40px] hover:text-red-500 rounded-full bg-transparent"
             >
               <FaCartPlus className="text-3xl" />
             </Badge>
-            <Badge
-              className="absolute top-12 end-2 text-center justify-center rounded-full cursor-pointer p-0 h-[40px] w-[40px]"
-              variant="outline"
-            >
-              <CiHeart className="hover:text-red-500 text-2xl font-bold" />
-            </Badge>
+            {addedToWishList ? (
+              <Badge
+                onClick={() => handleRemoveFomrWishList(id)}
+                className="absolute top-12 end-2 text-center justify-center rounded-full cursor-pointer p-0 h-[40px] w-[40px]"
+                variant="outline"
+              >
+                <FaHeart className="text-red-500 text-xl font-bold" />
+              </Badge>
+            ) : (
+              <Badge
+                onClick={() => handleAddToWishList(id)}
+                className="absolute top-12 end-2 text-center justify-center rounded-full cursor-pointer p-0 h-[40px] w-[40px]"
+                variant="outline"
+              >
+                <CiHeart className="hover:text-red-500 text-2xl font-bold" />
+              </Badge>
+            )}
           </CardHeader>
         </Card>
       </CarouselItem>

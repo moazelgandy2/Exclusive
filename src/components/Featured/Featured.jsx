@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // Import components from
 import SectionHead from "../SectionHead/SectionHead";
@@ -13,10 +13,16 @@ import {
 import { useQuery } from "react-query";
 import axios from "axios";
 import ProductCard from "./ProductCard";
-import { Skeleton } from "../ui/skeleton";
 import ProductCardSkelton from "./ProductCardSkelton";
+import { WishListContext } from "@/components/Contexts/WishList";
+import { CartContext } from "../Contexts/CartContext";
 
 function Featured() {
+  const { wishList, getWishList } = useContext(WishListContext);
+  useEffect(() => {
+    getWishList();
+  }, []);
+
   function getProducts() {
     return axios.get("https://ecommerce.routemisr.com/api/v1/products?limit=10");
   }
@@ -29,7 +35,7 @@ function Featured() {
         <div className="products relative px-5">
           <Carousel className="my-5">
             <CarouselContent className="ms-2 gap-3">
-              {isLoading ? (
+              {isLoading && wishList ? (
                 <>
                   <ProductCardSkelton />
                   <ProductCardSkelton />

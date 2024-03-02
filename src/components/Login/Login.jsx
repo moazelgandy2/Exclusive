@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LoginImg from "../../assets/images/login.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import axios from "axios";
+import { useNavigate } from "react-router";
+import { TokenContext } from "../Contexts/Token";
 function Login() {
-  const submitForm = () => {
-    console.log(formik.values);
-  };
+  const { token, setToken } = React.useContext(TokenContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("userToken")) {
+      setToken(localStorage.getItem("userToken"));
+      navigate("/");
+    }
+  }, []);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
+  async function submitForm() {
+    const options = { ...formik.values };
+    setIsLoading(true);
+    let { data } = await axios
+      .post("https://ecommerce.routemisr.com/api/v1/auth/signin", formik.values)
+      .catch((err) => {
+        console.log(err);
+        setError(err.response.data.message);
+        setIsLoading(false);
+      });
+    if (data.message === "success") {
+      localStorage.setItem("userToken", data.token);
+      setToken(localStorage.getItem("userToken"));
+      navigate("/");
+    }
+    setIsLoading(false);
+  }
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -37,6 +66,7 @@ function Login() {
             <h2 className="text-lg font-bold mt-2">Login to your account</h2>
             <p className="text-sm my-1 text-gray-500">Enter your account details</p>
           </div>
+          <span className="text-red-500 font-semibold my-5">{error}</span>
           <form
             className="w-full relative flex flex-col justify-between items-center gap-5"
             onSubmit={formik.handleSubmit}
@@ -71,8 +101,12 @@ function Login() {
                 id="password"
               />
             </div>
-            <button type="submit" className="p-2 rounded-sm bg-[#DB4444] text-white">
-              Login now
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="p-2 disabled:cursor-not-allowed rounded-sm bg-[#DB4444] text-white"
+            >
+              {isLoading ? "Logging you in securely..." : "Login now"}
             </button>
           </form>
         </div>

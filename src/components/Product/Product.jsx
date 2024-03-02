@@ -1,19 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router";
 import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
 import { GiBackForth } from "react-icons/gi";
 import { Skeleton } from "@/components/ui/skeleton";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
+import { WishListContext } from "../Contexts/WishList";
+import { toast } from "sonner";
+import { TokenContext } from "../Contexts/Token";
+import { CartContext } from "../Contexts/CartContext";
 
 function Product() {
+  const location = useLocation();
+
   const { id } = useParams();
-  const [quantity, setQuantity] = useState(1);
   const [inViewImg, setInViewImg] = useState("");
   const [product, setProduct] = useState({});
   const [rating, setRating] = useState(0);
+  const { wishList, addToWishList, removeFromWishList, getWishList } = useContext(WishListContext);
+  const { cart, addToCart, removeFromCart, getCart, decreaseCount } = useContext(CartContext);
+  const [addedToWishList, setAddedToWishList] = useState(false);
+  const { token } = useContext(TokenContext);
+  const [getList, setGetList] = useState(false);
+  const [count, setCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    renderList();
+  }, [getList]);
+  const prodd = cart?.data?.products.find((prod) => prod?.product?._id === id);
+
+  useEffect(() => {
+    if (prodd !== undefined) {
+      setCount(prodd.count);
+    }
+  }, [prodd]);
+
+  async function renderList() {
+    await getWishList();
+    await getCart();
+    setGetList(true);
+    if (wishList) {
+      const pe = wishList.find((prod) => prod.id === id);
+      if (pe !== undefined) {
+        setAddedToWishList(true);
+      } else {
+        setAddedToWishList(false);
+      }
+    }
+  }
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -30,6 +68,20 @@ function Product() {
     return stars;
   };
 
+  const handleAddToWishList = async () => {
+    await addToWishList({ token: token, prodId: id });
+    getWishList();
+    setAddedToWishList(true);
+  };
+
+  const handleRemoveFromWishList = async () => {
+    if (addedToWishList) {
+      const promise = await removeFromWishList({ token: token, prodId: id });
+      getWishList();
+      setAddedToWishList(false);
+    }
+  };
+
   useEffect(() => {
     axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`).then((res) => {
       setProduct(res.data.data);
@@ -41,11 +93,17 @@ function Product() {
   const handleImgClick = (e) => {
     setInViewImg(e.target.currentSrc);
   };
-  const handleIncrease = () => {
-    setQuantity((q) => q + 1);
+
+  const handleIncrease = async () => {
+    setIsLoading(true);
+    await addToCart({ token: token, prodId: id });
+    setIsLoading(false);
   };
-  const handleDecrease = () => {
-    quantity != 1 ? setQuantity((q) => q - 1) : "";
+
+  const handleDecrease = async () => {
+    setIsLoading(true);
+    await decreaseCount({ token: token, prodId: id, count: count - 1 });
+    setIsLoading(false);
   };
   return (
     <>
@@ -122,15 +180,17 @@ function Product() {
           <div className="actions my-3 flex justify-evenly items-center gap-1 w-full">
             <div className="quant flex items-center [30%]">
               <button
+                disabled={isLoading}
                 onClick={handleIncrease}
-                className="px-3 py-1 border border-[#7F7F7F] rounded-sm text-black hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white transition-all ease-linear"
+                className="px-3 py-1 border disabled:bg-white disabled:text-black disabled:cursor-not-allowed border-[#7F7F7F] rounded-sm text-black hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white transition-all ease-linear"
               >
                 +
               </button>
-              <p className="mx-1">{quantity}</p>
+              <p className="mx-1">{count}</p>
               <button
+                disabled={count == 0 || isLoading}
                 onClick={handleDecrease}
-                className="px-3 py-1 border border-[#7F7F7F] rounded-sm text-black hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white transition-all ease-linear"
+                className="px-3 py-1 border disabled:bg-white disabled:text-black disabled:cursor-not-allowed border-[#7F7F7F] rounded-sm text-black hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white transition-all ease-linear"
               >
                 -
               </button>
@@ -138,9 +198,21 @@ function Product() {
             <button className="p-2 bg-[#DB4444] rounded-md text-white w-[55%] hover:bg-[#f04b4b] transition-all ease-linear">
               Buy now
             </button>
-            <i className="w-[10%] p-1 ms-2 text-3xl rounded-md border text-center justify-center flex cursor-pointer hover:text-[#DB4444]">
-              <CiHeart />
-            </i>
+            {addedToWishList ? (
+              <i
+                onClick={handleRemoveFromWishList}
+                className="w-[10%] p-1 ms-2 text-3xl rounded-md border text-center justify-center flex cursor-pointer text-[#DB4444]"
+              >
+                <FaHeart />
+              </i>
+            ) : (
+              <i
+                onClick={handleAddToWishList}
+                className="w-[10%] p-1 ms-2  text-3xl rounded-md border text-center justify-center flex cursor-pointer hover:text-[#DB4444]"
+              >
+                <CiHeart />
+              </i>
+            )}
           </div>
           <div className="border my-5 rounded-md flex flex-col justify-center items-center">
             <div className="py-5 borer-b w-full flex justify-start items-center">
@@ -204,15 +276,17 @@ function Product() {
           <div className="actions my-3 flex justify-evenly items-center gap-1 w-full">
             <div className="quant flex items-center [30%]">
               <button
+                disabled={isLoading}
                 onClick={handleIncrease}
-                className="px-3 py-1 border border-[#7F7F7F] rounded-sm text-black hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white transition-all ease-linear"
+                className="px-3 disabled:text-black disabled:bg-white py-1 border border-[#7F7F7F] rounded-sm text-black hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white transition-all ease-linear"
               >
                 +
               </button>
-              <p className="mx-1">{quantity}</p>
+              <p className="mx-1">{count}</p>
               <button
+                disabled={count == 0 || isLoading}
                 onClick={handleDecrease}
-                className="px-3 py-1 border border-[#7F7F7F] rounded-sm text-black hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white transition-all ease-linear"
+                className="px-3 py-1 border disabled:cursor-not-allowed disabled:bg-white disabled:text-black border-[#7F7F7F] rounded-sm text-black hover:bg-[#DB4444] hover:border-[#DB4444] hover:text-white transition-all ease-linear"
               >
                 -
               </button>
@@ -220,9 +294,21 @@ function Product() {
             <button className="p-2 bg-[#DB4444] rounded-md text-white w-[55%] hover:bg-[#f04b4b] transition-all ease-linear">
               Buy now
             </button>
-            <i className="w-[10%] p-1 ms-2 text-3xl rounded-md border text-center justify-center flex cursor-pointer hover:text-[#DB4444]">
-              <CiHeart />
-            </i>
+            {addedToWishList ? (
+              <i
+                onClick={handleRemoveFromWishList}
+                className="w-[10%] p-1 ms-2 text-3xl rounded-md border text-center justify-center flex cursor-pointer text-[#DB4444]"
+              >
+                <FaHeart />
+              </i>
+            ) : (
+              <i
+                onClick={handleAddToWishList}
+                className="w-[10%] p-1 ms-2  text-3xl rounded-md border text-center justify-center flex cursor-pointer hover:text-[#DB4444]"
+              >
+                <CiHeart />
+              </i>
+            )}
           </div>
           <div className="border my-5 rounded-md flex flex-col justify-center items-center">
             <div className="py-5 borer-b w-full flex justify-start items-center">

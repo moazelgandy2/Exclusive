@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LoginImg from "../../assets/images/register.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { TokenContext } from "../Contexts/Token";
+import { useNavigate } from "react-router";
 
 function Register() {
+  const { token, setToken } = useContext(TokenContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const submitForm = (values) => {
+    setIsLoading(true);
     const options = {
       name: values.name,
       email: values.email,
@@ -13,9 +19,18 @@ function Register() {
       password: values.password,
       rePassword: values.rePassword,
     };
-    axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, options).then((res) => {
-      console.log(res.data.token);
-    });
+    axios
+      .post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, options)
+      .then((res) => {
+        setIsLoading(false);
+        localStorage.setItem("userToken", res.data.token);
+        setToken(res.data.token);
+        navigate("/");
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   };
 
   const RegisterSchema = Yup.object().shape({
@@ -30,7 +45,7 @@ function Register() {
       .matches(/^(012|011|010|015)\d{8}$/, "Valid phone number is requird")
       .min(11, "Valid phone number is required")
       .max(11, "Valid phone number is requird"),
-    password: Yup.string().min(5, "Password is too short").required("Password filed is required"),
+    password: Yup.string().min(6, "Password is too short").required("Password filed is required"),
     rePassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
       .required("This field is requird"),
@@ -93,7 +108,7 @@ function Register() {
                 id="phone"
               />
             </div>
-            <div className=" lg:w-4/5 md:w-4/5 relative">
+            <div className=" lg:w-4/5 md:w-4/5 w-full relative">
               <p className="text-[12px] absolute bottom-9 left-2 z-20 text-red-600 font-semibold">
                 {formik.touched.email && formik.errors.email ? formik.errors.email : ""}
               </p>
@@ -142,7 +157,11 @@ function Register() {
                 />
               </div>
             </div>
-            <button type="submit" className="p-2 rounded-sm bg-[#DB4444] text-white">
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="p-2 disabled:cursor-not-allowed rounded-sm bg-[#DB4444] text-white"
+            >
               Create account
             </button>
           </form>
