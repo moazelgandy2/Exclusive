@@ -81,9 +81,9 @@ export function Orders() {
                   ""
                 )}
                 {orders.length != 0
-                  ? orders.map((order) => {
+                  ? orders.map((order, i) => {
                       return (
-                        <TableRow>
+                        <TableRow key={i}>
                           <TableCell className="font-medium"># {order.id}</TableCell>
                           <TableCell>{order.user.name}</TableCell>
                           <TableCell className="hidden md:table-cell">

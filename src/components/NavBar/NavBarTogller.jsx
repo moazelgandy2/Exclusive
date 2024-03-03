@@ -16,8 +16,25 @@ import {
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
+import { CiLogout } from "react-icons/ci";
+import { TokenContext } from "../Contexts/Token";
+import { useContext, useEffect, useState } from "react";
 
 export function NavBarTogller() {
+  const { token, setToken } = useContext(TokenContext);
+  const [disabled, setDisabled] = useState(false);
+  useEffect(() => {
+    if (token === null) {
+      setDisabled(true);
+    }
+  }, [token]);
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("user");
+    setToken(null);
+    window.location("/").reload;
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -67,6 +84,18 @@ export function NavBarTogller() {
             </DropdownMenuPortal>
           </DropdownMenuSub>
         </DropdownMenuGroup>
+        <Link to={"/login"} className={!disabled ? "hidden" : ""}>
+          <DropdownMenuItem>Login</DropdownMenuItem>
+        </Link>
+        <Link to={"/register"} className={!disabled ? "hidden" : ""}>
+          <DropdownMenuItem>Register</DropdownMenuItem>
+        </Link>
+        <DropdownMenuItem className={disabled ? "hidden" : ""} onClick={handleLogout}>
+          Log out
+          <DropdownMenuShortcut className={"text-2xl"}>
+            <CiLogout />
+          </DropdownMenuShortcut>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

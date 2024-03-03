@@ -31,7 +31,6 @@ function Account() {
         if (res.data.message === "success") {
           console.log(res.data);
           localStorage.removeItem("user");
-          localStorage.setItem("user", JSON.stringify(res.data.user));
         }
         setIsLoading(false);
         toast.success("Profile updated successfully");
