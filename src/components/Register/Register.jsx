@@ -6,9 +6,11 @@ import axios from "axios";
 import { TokenContext } from "../Contexts/Token";
 import { useNavigate } from "react-router";
 import { Helmet } from "react-helmet";
+import { jwtDecode } from "jwt-decode";
 
 function Register() {
   const { token, setToken } = useContext(TokenContext);
+  let user = {};
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [erro, setErro] = useState(null);
@@ -26,7 +28,9 @@ function Register() {
       .then((res) => {
         setIsLoading(false);
         localStorage.setItem("userToken", res.data.token);
-        setToken(res.data.token);
+
+        user = { email: res.data.user.email, ...jwtDecode(res.data.token) };
+        localStorage.setItem("user", JSON.stringify(user));
         navigate("/");
       })
       .catch((err) => {

@@ -3,12 +3,14 @@ import LoginImg from "../../assets/images/login.svg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { redirect, useNavigate } from "react-router";
 import { TokenContext } from "../Contexts/Token";
 import { Helmet } from "react-helmet";
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
   const { token, setToken } = React.useContext(TokenContext);
+  let user = {};
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("userToken")) {
@@ -16,8 +18,8 @@ function Login() {
       navigate("/");
     }
   }, []);
-  const [isLoading, setIsLoading] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   async function submitForm() {
@@ -32,8 +34,10 @@ function Login() {
       });
     if (data.message === "success") {
       localStorage.setItem("userToken", data.token);
-      setToken(localStorage.getItem("userToken"));
-      navigate("/");
+      user = { email: data.user.email, ...jwtDecode(data.token) };
+      localStorage.setItem("user", JSON.stringify(user));
+
+      window.location.href = "/";
     }
     setIsLoading(false);
   }
