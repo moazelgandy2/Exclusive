@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoHeartOutline } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
 
@@ -16,11 +16,14 @@ import logout from "../../assets/images/logout.png";
 import { TokenContext } from "../Contexts/Token";
 import { CartContext } from "../Contexts/CartContext";
 import { MdAccountCircle } from "react-icons/md";
+import { TTT } from "./TTT";
 
 function NavBar() {
   const { token, setToken } = useContext(TokenContext);
   const { cart, getCart } = useContext(CartContext);
   const location = useLocation();
+  const [navOpen, setNavOpen] = useState(false);
+
   useEffect(() => {
     getCart();
   }, [location]);
@@ -33,10 +36,13 @@ function NavBar() {
   return (
     <nav className="px-14 py-4 mx-auto border-b border-[#B3B3B3]">
       <ul className="grid grid-cols-12 items-center">
-        <li className="logo cursor-pointer lg:col-span-2 md:col-span-2 col-span-6">
+        <li className="logo  lg:col-span-2 md:col-span-2 lg:block md:block hidden">
           <Link to="/">
             <h3 className="font-bold text-xl">Exclusive</h3>
           </Link>
+        </li>
+        <li className="navButton lg:hidden md:hidden col-span-6">
+          <TTT></TTT>
         </li>
         <li className="lg:col-span-8 md:col-span-8 lg:block md:block hidden">
           <ul className="flex justify-center items-center gap-5">
@@ -129,7 +135,7 @@ function NavBar() {
             </NavigationMenu>
           </ul>
         </li>
-        <li className="lg:col-span-2 md:col-span-2 col-span-6 items-center">
+        <li className="lg:col-span-2 md:col-span-2 col-span-6 items-center justify-center">
           <div className="content flex justify-end items-center font-bold text-xl gap-4">
             <Link to={"/wishlist"} className="cursor-pointer">
               <IoHeartOutline />
@@ -145,9 +151,13 @@ function NavBar() {
 
               <BsCart3 />
             </Link>
-            <Link to={"/account"} className="cursor-pointer relative">
-              <MdAccountCircle />
-            </Link>
+            {token == null ? (
+              ""
+            ) : (
+              <Link to={"/account"} className="cursor-pointer relative">
+                <MdAccountCircle />
+              </Link>
+            )}
           </div>
         </li>
       </ul>

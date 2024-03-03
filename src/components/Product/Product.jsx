@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { redirect, useParams } from "react-router";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -81,6 +81,11 @@ function Product() {
       getWishList();
       setAddedToWishList(false);
     }
+  };
+
+  const handleAddToCart = async (prodId) => {
+    if (!token) return toast.error("You need to login first");
+    await addToCart({ token: token, prodId: prodId });
   };
 
   useEffect(() => {
@@ -202,7 +207,12 @@ function Product() {
                 -
               </button>
             </div>
-            <button className="p-2 bg-[#DB4444] rounded-md text-white w-[55%] hover:bg-[#f04b4b] transition-all ease-linear">
+            <button
+              onClick={() => {
+                handleAddToCart(id);
+              }}
+              className="p-2 bg-[#DB4444] rounded-md text-white w-[55%] hover:bg-[#f04b4b] transition-all ease-linear"
+            >
               Buy now
             </button>
             {addedToWishList ? (
