@@ -7,6 +7,7 @@ import { redirect, useNavigate } from "react-router";
 import { TokenContext } from "../Contexts/Token";
 import { Helmet } from "react-helmet";
 import { jwtDecode } from "jwt-decode";
+import { Link } from "react-router-dom";
 
 function Login() {
   const { token, setToken } = React.useContext(TokenContext);
@@ -110,13 +111,26 @@ function Login() {
                 id="password"
               />
             </div>
-            <button
-              disabled={isLoading}
-              type="submit"
-              className="p-2 disabled:cursor-not-allowed rounded-sm bg-[#DB4444] text-white"
-            >
-              {isLoading ? "Logging you in securely..." : "Login now"}
-            </button>
+            <div className="grid lg:grid-cols-12 grid-cols-8 items-center gap-12">
+              <div className="px-5 div lg:col-span-6 col-span-4">
+                <button
+                  disabled={isLoading}
+                  type="submit"
+                  className="p-2 disabled:cursor-not-allowed rounded-sm bg-[#DB4444] text-white"
+                >
+                  {isLoading ? "Logging you in securely..." : "Login now"}
+                </button>
+              </div>
+              <div className="div lg:col-span-6 col-span-4 flex justify-end">
+                <Link
+                  to={"/resetPassword"}
+                  disabled={isLoading}
+                  className="text-sm border-b border-[#DB4444] font-medium text-[#DB4444] "
+                >
+                  Forgot password?
+                </Link>
+              </div>
+            </div>
           </form>
         </div>
       </div>

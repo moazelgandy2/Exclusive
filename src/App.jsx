@@ -17,6 +17,7 @@ import Category from "./components/Category/Category";
 import Brands from "./components/Brands/Brands";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import Account from "./components/Account/Account";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/resetPassword" element={<ResetPassword />} />
                 <Route path="/product/:id" element={<Product />} />
                 <Route
                   path="/cart"
