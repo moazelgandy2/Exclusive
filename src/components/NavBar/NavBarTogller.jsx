@@ -17,11 +17,11 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 
-export function TTT() {
+export function NavBarTogller() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button className=" focus-visible:ring-0" variant="outline">
           <FaBarsStaggered />
         </Button>
       </DropdownMenuTrigger>

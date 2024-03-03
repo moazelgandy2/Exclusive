@@ -16,7 +16,7 @@ import logout from "../../assets/images/logout.png";
 import { TokenContext } from "../Contexts/Token";
 import { CartContext } from "../Contexts/CartContext";
 import { MdAccountCircle } from "react-icons/md";
-import { TTT } from "./TTT";
+import { NavBarTogller } from "./NavBarTogller";
 
 function NavBar() {
   const { token, setToken } = useContext(TokenContext);
@@ -42,7 +42,7 @@ function NavBar() {
           </Link>
         </li>
         <li className="navButton lg:hidden md:hidden col-span-6">
-          <TTT></TTT>
+          <NavBarTogller />
         </li>
         <li className="lg:col-span-8 md:col-span-8 lg:block md:block hidden">
           <ul className="flex justify-center items-center gap-5">
