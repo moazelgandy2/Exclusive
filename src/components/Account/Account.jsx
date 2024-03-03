@@ -8,7 +8,6 @@ import axios from "axios";
 import { Helmet } from "react-helmet";
 import { toast } from "sonner";
 import { Orders } from "./Orders";
-import { jwtDecode } from "jwt-decode";
 
 function Account() {
   const { token, setToken } = useContext(TokenContext);

@@ -9,7 +9,6 @@ import { Helmet } from "react-helmet";
 import { jwtDecode } from "jwt-decode";
 
 function Register() {
-  const { token, setToken } = useContext(TokenContext);
   let user = {};
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();

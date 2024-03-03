@@ -1,6 +1,4 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
 import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
@@ -18,26 +16,22 @@ import {
   Table,
   TableHead,
 } from "@/components/ui/table";
-import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../Contexts/Token";
 import axios from "axios";
 import { Skeleton } from "../ui/skeleton";
 
 export function Orders() {
-  const { token, user } = useContext(TokenContext);
+  const { user } = useContext(TokenContext);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     axios
       .get(`https://ecommerce.routemisr.com/api/v1/orders/user/${JSON.parse(user).id}`)
       .then((res) => {
-        console.log(res.data);
         setOrders(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   function formatDate(dateString) {

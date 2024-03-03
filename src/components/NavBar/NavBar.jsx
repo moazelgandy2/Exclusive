@@ -22,7 +22,6 @@ function NavBar() {
   const { token, setToken } = useContext(TokenContext);
   const { cart, getCart } = useContext(CartContext);
   const location = useLocation();
-  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
     getCart();

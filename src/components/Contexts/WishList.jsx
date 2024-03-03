@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
-import { useQuery } from "react-query";
 import { toast } from "sonner";
 
 export const WishListContext = createContext();

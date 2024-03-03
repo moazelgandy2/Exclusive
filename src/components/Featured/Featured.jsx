@@ -5,7 +5,6 @@ import SectionHead from "../SectionHead/SectionHead";
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
@@ -15,7 +14,6 @@ import axios from "axios";
 import ProductCard from "./ProductCard";
 import ProductCardSkelton from "./ProductCardSkelton";
 import { WishListContext } from "@/components/Contexts/WishList";
-import { CartContext } from "../Contexts/CartContext";
 
 function Featured() {
   const { wishList, getWishList } = useContext(WishListContext);
@@ -27,7 +25,7 @@ function Featured() {
     return axios.get("https://ecommerce.routemisr.com/api/v1/products?limit=10");
   }
 
-  const { isLoading, data, isError } = useQuery("products", getProducts);
+  const { isLoading, data } = useQuery("products", getProducts);
 
   return (
     <>

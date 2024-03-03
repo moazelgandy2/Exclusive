@@ -13,7 +13,7 @@ function ResetPassword() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [page, setPage] = useState("reset");
-  const { token, setToken } = React.useContext(TokenContext);
+  const { setToken } = React.useContext(TokenContext);
   const [email, setEmail] = useState("");
 
   useEffect(() => {
