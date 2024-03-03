@@ -7,7 +7,6 @@ import { useFormik } from "formik";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { toast } from "sonner";
-import { jwtDecode } from "jwt-decode";
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -16,7 +15,6 @@ function ResetPassword() {
   const [page, setPage] = useState("reset");
   const { token, setToken } = React.useContext(TokenContext);
   const [email, setEmail] = useState("");
-  let user = {};
 
   useEffect(() => {
     if (localStorage.getItem("userToken")) {

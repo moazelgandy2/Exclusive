@@ -20,7 +20,7 @@ function BestSelling() {
   return (
     <>
       <SectionHead title={"Best Selling"}>
-        <div className="my-5 px-5">
+        <div className="my-5 px-16">
           <Carousel>
             <CarouselContent>
               {products?.map((prod) => {

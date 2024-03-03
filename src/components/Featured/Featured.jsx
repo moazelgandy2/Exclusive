@@ -32,7 +32,7 @@ function Featured() {
   return (
     <>
       <SectionHead title="Featured Products">
-        <div className="products relative px-5">
+        <div className="products relative px-16">
           <Carousel className="my-5">
             <CarouselContent className="ms-2 gap-3">
               {isLoading && wishList ? (

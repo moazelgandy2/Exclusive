@@ -10,7 +10,7 @@ function NewArrival() {
   return (
     <>
       <SectionHead title="New Arrival">
-        <div className="my-5 px-5">
+        <div className="my-5 px-16">
           <div className="grid grid-cols-12 gap-2">
             <div className="lg:col-span-7  col-span-12">
               <div className="bg-gradient-to-br lg:h-[610px] rounded-sm from-[#323232] to-black">

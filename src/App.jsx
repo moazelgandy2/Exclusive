@@ -18,7 +18,7 @@ import Brands from "./components/Brands/Brands";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import Account from "./components/Account/Account";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
-import Otp from "./components/ResetPassword/Otp";
+import CheckOut from "./components/Checkout/CheckOut";
 
 function App() {
   return (
@@ -34,8 +34,16 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/resetPassword" element={<ResetPassword />} />
-                <Route path="/resetPassword/otp" element={<Otp />} />
                 <Route path="/product/:id" element={<Product />} />
+                <Route
+                  path="/checkout"
+                  element={
+                    <ProtectedRoutes>
+                      <CheckOut />
+                    </ProtectedRoutes>
+                  }
+                />
+
                 <Route
                   path="/cart"
                   element={

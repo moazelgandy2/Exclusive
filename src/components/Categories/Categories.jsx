@@ -20,7 +20,7 @@ function Categories() {
   return (
     <>
       <SectionHead title={"Categories"}>
-        <div className="categ my-5 px-5">
+        <div className="categ my-5 px-16">
           <Carousel className="w-full">
             <CarouselContent className="flex lg:justify-center md:justify-center">
               <CarouselItem className="lg:basis-1/5 md:basis-1/4 sm:basis-1/3">
