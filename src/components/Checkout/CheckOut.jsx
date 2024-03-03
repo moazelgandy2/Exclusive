@@ -9,48 +9,154 @@ import { useContext, useState } from "react";
 import SingleProduct from "./SingleProduct";
 import { Skeleton } from "../ui/skeleton";
 import SingleProductSkelton from "./SingleProductSkelton";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import { TokenContext } from "../Contexts/Token";
+import { toast } from "sonner";
 
 function CheckOut() {
   const { cart, getCart } = useContext(CartContext);
-  console.log(cart);
+  const [isLoading, setIsLoading] = useState(false);
+  const { token } = useContext(TokenContext);
+  const rediRectTo = "http://localhost:5173";
+
+  const handleFormSubmit = (values) => {
+    setIsLoading(true);
+    const options = {
+      details: values.streetAddress,
+      phone: values.phoneNumber,
+      city: values.city,
+    };
+
+    axios
+      .post(
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cart.data._id}?url=${rediRectTo}`,
+        { ...options },
+        { headers: { token: token } }
+      )
+      .then((res) => {
+        console.log(res.data.session);
+        toast.success("Order placed successfully.Redirecting to payment gateway.");
+        setTimeout(() => {
+          window.location.href = res.data.session.url;
+        }, 1000);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  };
+
+  const validationSchema = Yup.object({
+    firstName: Yup.string().min(4, "Min chars is 4").required("First name is required"),
+    lastName: Yup.string().min(4, "Min chars is 4").required("Last name is required"),
+    streetAddress: Yup.string().required("Street address is required"),
+    city: Yup.string().required("City is required"),
+    email: Yup.string().email("Invalid email address").required("Email is required"),
+    phoneNumber: Yup.string().required("Phone number is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      streetAddress: "",
+      city: "",
+      email: "",
+      phoneNumber: "",
+    },
+    onSubmit: handleFormSubmit,
+    validationSchema: validationSchema,
+  });
+
   return (
     <>
       <SectionHead title={"Billing details"}>
-        <div className="grid grid-cols-12 min-h-[80vh] my-8">
+        <div className="grid grid-cols-12 min-h-[80vh] my-8 relative">
           <div className="lg:col-span-8 md:col-span-6 lg:block flex justify-center col-span-12">
-            <form className="lg:w-5/6 w-[90%]">
-              <div className="group gap-y-8 grid grid-cols-12 gap-4 ms-4">
+            <form className="lg:w-5/6 w-[90%]" onSubmit={formik.handleSubmit}>
+              <div className="group gap-y-8 relative grid grid-cols-12 gap-4 ms-4">
+                <p className="text-[12px] absolute -top-6 left-2 z-20 text-red-600 font-semibold">
+                  {formik.touched.firstName && formik.errors.firstName
+                    ? formik.errors.firstName
+                    : ""}
+                </p>
                 <Input
+                  name="firstName"
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className="bg-[#F5F5F5] col-span-6 border-0 focus-visible:ring-0 h-[50px]"
                   placeholder="First Name*"
                   type="text"
                 />
+                <p className="text-[12px] absolute -top-6 left-1/2 z-20 text-red-600 font-semibold">
+                  {formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : ""}
+                </p>
                 <Input
+                  name="lastName"
+                  value={formik.values.lastName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className="bg-[#F5F5F5] col-span-6 border-0 focus-visible:ring-0 h-[50px]"
                   placeholder="Last Name*"
                   type="text"
                 />
-                <div className="group gap-y-8 col-span-12">
+                <div className="group gap-y-8 col-span-12 relative">
+                  <p className="text-[12px] absolute -top-6 left-2 z-20 text-red-600 font-semibold">
+                    {formik.touched.streetAddress && formik.errors.streetAddress
+                      ? formik.errors.streetAddress
+                      : ""}
+                  </p>
                   <Input
+                    name="streetAddress"
+                    value={formik.values.streetAddress}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     className="bg-[#F5F5F5] col-span-12 border-0 focus-visible:ring-0 h-[50px]"
                     placeholder="Street Address*"
                     type="text"
                   />
                 </div>
-                <div className="group gap-y-8 col-span-12">
+                <div className="group gap-y-8 col-span-12 relative">
+                  <p className="text-[12px] absolute -top-6 left-2 z-20 text-red-600 font-semibold">
+                    {formik.touched.city && formik.errors.city ? formik.errors.city : ""}
+                  </p>
                   <Input
+                    name="city"
+                    value={formik.values.city}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     className="bg-[#F5F5F5] col-span-6 border-0 focus-visible:ring-0 h-[50px]"
                     placeholder="City*"
                     type="text"
                   />
                 </div>
-                <div className="group gap-y-8 grid grid-cols-12 gap-4 col-span-12">
+                <div className="group gap-y-8 grid grid-cols-12 gap-4 col-span-12 relative">
+                  <p className="text-[12px] absolute -top-6 left-2 z-20 text-red-600 font-semibold">
+                    {formik.touched.email && formik.errors.email ? formik.errors.email : ""}
+                  </p>
                   <Input
+                    name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     className="bg-[#F5F5F5] col-span-6 border-0 focus-visible:ring-0 h-[50px]"
                     placeholder="Email Address*"
                     type="text"
                   />
+                  <p className="text-[12px] absolute -top-6 left-1/2 z-20 text-red-600 font-semibold">
+                    {formik.touched.phoneNumber && formik.errors.phoneNumber
+                      ? formik.errors.phoneNumber
+                      : ""}
+                  </p>
                   <Input
+                    name="phoneNumber"
+                    value={formik.values.phoneNumber}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     className="bg-[#F5F5F5] col-span-6 border-0 focus-visible:ring-0 h-[50px]"
                     placeholder="Phone Number*"
                     type="tel"
@@ -63,6 +169,15 @@ function CheckOut() {
                   </Label>
                 </div>
               </div>
+              <Button
+                disabled={cart.numOfCartItems == 0 || isLoading}
+                className={
+                  "w-4/5 bg-[#DB4444] hover:bg-[#eb4848] absolute bottom-5 left-1/2 transform -translate-x-1/2"
+                }
+                type="submit"
+              >
+                Place Order
+              </Button>
             </form>
           </div>
           <div className="lg:col-span-4 flex flex-col lg:my-0 md:my-8 my-16 px-5 md:col-span-6 col-span-12">
@@ -111,14 +226,6 @@ function CheckOut() {
                 </div>
               </RadioGroup>
             </div>
-
-            <Button
-              disabled={cart.numOfCartItems == 0}
-              className="w-full bg-[#DB4444] hover:bg-[#eb4848]"
-              type="submit"
-            >
-              Place Order
-            </Button>
           </div>
         </div>
       </SectionHead>

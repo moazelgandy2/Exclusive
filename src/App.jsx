@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
@@ -65,6 +65,14 @@ function App() {
                   element={
                     <ProtectedRoutes>
                       <Account />
+                    </ProtectedRoutes>
+                  }
+                />
+                <Route
+                  path="/allorders"
+                  element={
+                    <ProtectedRoutes>
+                      <Navigate to="/account" replace />
                     </ProtectedRoutes>
                   }
                 />

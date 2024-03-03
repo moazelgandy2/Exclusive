@@ -16,12 +16,14 @@ import { Helmet } from "react-helmet";
 function Cart() {
   const { cart, getCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     getCart();
   }, []);
 
   useEffect(() => {
+    if (cart == [] || undefined) {
+      setProducts([]);
+    }
     setProducts(cart?.data);
   }, [cart]);
 
@@ -57,7 +59,7 @@ function Cart() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {products?.products?.length != 0 ? (
+            {products?.products?.length != 0 && products != undefined ? (
               products?.products?.map((product) => {
                 return (
                   <ProductRow
@@ -94,9 +96,15 @@ function Cart() {
             <p className="text-gray-500">Total</p>
             <p className="text-gray-500">{products?.totalCartPrice} EGP</p>
           </div>
-          <button className="p-2 bg-[#DB4444] hover:bg-[#be3c3c] text-white w-3/4 md:w-1/2 lg:w-1/2 rounded-sm relative left-1/2 transform -translate-x-1/2">
+          <Link
+            to={"/checkout"}
+            className={
+              (products?.length == 0 ? "pointer-events-none" : "",
+              "p-2 flex justify-center bg-[#DB4444] hover:bg-[#be3c3c] text-white w-3/4 md:w-1/2 lg:w-1/2 rounded-sm relative left-1/2 transform -translate-x-1/2")
+            }
+          >
             Procees to checkout
-          </button>
+          </Link>
         </div>
       </div>
     </>
