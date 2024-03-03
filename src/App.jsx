@@ -27,7 +27,7 @@ function App() {
           <WishListContextProvider>
             <CartContextProvider>
               <NavBar />
-              <Toaster position="bottom-center" richColors />
+              <Toaster position="bottom-center" />
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
