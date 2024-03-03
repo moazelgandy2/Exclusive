@@ -308,7 +308,12 @@ function Product() {
                 -
               </button>
             </div>
-            <button className="p-2 bg-[#DB4444] rounded-md text-white w-[55%] hover:bg-[#f04b4b] transition-all ease-linear">
+            <button
+              onClick={() => {
+                handleAddToCart(id);
+              }}
+              className="p-2 bg-[#DB4444] rounded-md text-white w-[55%] hover:bg-[#f04b4b] transition-all ease-linear"
+            >
               Buy now
             </button>
             {addedToWishList ? (
