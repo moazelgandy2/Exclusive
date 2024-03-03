@@ -117,32 +117,13 @@ function Account() {
       </Helmet>
       <SectionHead title={"My Account"}>
         <section className="lg:px-12 px-4 py-12 w-full">
-          <aside className="lg:block hidden">
-            <div className="sec">
-              <h2 className="text-lg font-medium">Manage account</h2>
-              <div className="links px-8 my-8">
-                <ul className="flex flex-col text-lg justify-center items-start gap-2">
-                  <li className="text-[#DB4444] cursor-pointer">Profile</li>
-                  <li className="text-[#7F7F7F] cursor-pointer">Adress Book</li>
-                </ul>
-              </div>
-            </div>
-            <div className="sec">
-              <h2 className="text-lg font-medium">Orders</h2>
-              <div className="links px-8 my-4">
-                <ul>
-                  <li className="text-[#7F7F7F]">Recent orders</li>
-                </ul>
-              </div>
-            </div>
-          </aside>
-          <Tabs defaultValue="account" className="w-full lg:hidden justify-center flex flex-col">
+          <Tabs defaultValue="profile" className="w-full justify-center flex flex-col">
             <TabsList className="mb-8">
-              <TabsTrigger value="profil">Profile</TabsTrigger>
+              <TabsTrigger value="profile">Profile</TabsTrigger>
               <TabsTrigger value="password">Password</TabsTrigger>
               <TabsTrigger value="orders">Orders</TabsTrigger>
             </TabsList>
-            <TabsContent value="profil">
+            <TabsContent value="profile">
               <form
                 className="w-full relative flex flex-col justify-between items-center gap-5"
                 onSubmit={formik.handleSubmit}
