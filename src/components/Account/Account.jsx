@@ -8,13 +8,13 @@ import axios from "axios";
 import { Helmet } from "react-helmet";
 import { toast } from "sonner";
 import { Orders } from "./Orders";
+import { jwtDecode } from "jwt-decode";
 
 function Account() {
   const { token, setToken } = useContext(TokenContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
-
   const SubmitUpdateProile = async () => {
     setIsLoading(true);
     axios
@@ -51,20 +51,17 @@ function Account() {
         },
       })
       .then((res) => {
-        if (res.data.message === "success") {
-          console.log(res.data);
-          localStorage.removeItem("user");
-          localStorage.removeItem("userToken");
-          localStorage.setItem("userToken", res.data.token);
-          localStorage.setItem("user", JSON.stringify(res.data.user));
-          formikPassword.resetForm();
-        }
+        console.log(res.data);
+        localStorage.removeItem("userToken");
+        localStorage.setItem("userToken", res.data.token);
+        formikPassword.resetForm();
         setIsLoading(false);
         toast.success("Password updated successfully");
       })
       .catch((err) => {
-        setError(err.response.data.errors.msg);
-        toast.error(err.response.data.errors.msg);
+        console.log(err);
+        setError(err.response.data.errors.msg || err.response.data.message);
+        toast.error(error);
         setIsLoading(false);
       });
   };

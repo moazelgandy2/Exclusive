@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { TokenContext } from "../Contexts/Token";
 import { toast } from "sonner";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 function CheckOut() {
   const { cart, getCart } = useContext(CartContext);
@@ -181,27 +182,30 @@ function CheckOut() {
             </form>
           </div>
           <div className="lg:col-span-4 flex flex-col lg:my-0 md:my-8 my-16 px-5 md:col-span-6 col-span-12">
-            {cart.numOfCartItems == 0 ? (
-              <h2 className="text-2xl font-semibold mb-6">Your Cart Is Empty</h2>
-            ) : (
-              ""
-            )}
-            {cart.length != 0 ? (
-              cart?.data?.products?.map((prod) => {
-                return (
-                  <SingleProduct
-                    key={prod.product._id}
-                    title={prod.product.title}
-                    price={prod.price}
-                    image={prod.product.imageCover}
-                  />
-                );
-              })
-            ) : (
-              <>
-                <SingleProductSkelton />
-              </>
-            )}
+            <ScrollArea className="h-[200px] border-0 w-full px-2 mb-2">
+              {cart.numOfCartItems == 0 ? (
+                <h2 className="text-2xl font-semibold mb-6">Your Cart Is Empty</h2>
+              ) : (
+                ""
+              )}
+              {cart.length != 0 ? (
+                cart?.data?.products?.map((prod) => {
+                  return (
+                    <SingleProduct
+                      key={prod.product._id}
+                      title={prod.product.title}
+                      price={prod.price}
+                      image={prod.product.imageCover}
+                    />
+                  );
+                })
+              ) : (
+                <>
+                  <SingleProductSkelton />
+                </>
+              )}
+            </ScrollArea>
+
             <div className="flex justify-between my-2 border-b border-[#999999] pb-2">
               <span>Subtotal:</span>
               <span>EGP {cart.length != 0 ? cart.data.totalCartPrice : "0"}</span>
@@ -214,6 +218,7 @@ function CheckOut() {
               <span>Total:</span>
               <span>EGP {cart.length != 0 ? cart.data.totalCartPrice : "0"}</span>
             </div>
+
             <div className="flex items-center mb-4">
               <RadioGroup defaultValue="bank">
                 <div className="flex items-center">
@@ -221,7 +226,7 @@ function CheckOut() {
                   <Label htmlFor="bank">Bank</Label>
                 </div>
                 <div className="flex items-center">
-                  <RadioGroupItem className="mr-2" id="cash" value="cash" />
+                  <RadioGroupItem disabled className="mr-2" id="cash" value="cash" />
                   <Label htmlFor="cash">Cash on delivery</Label>
                 </div>
               </RadioGroup>
