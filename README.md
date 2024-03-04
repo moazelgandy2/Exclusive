@@ -2,8 +2,6 @@
 
 Welcome to Exclusive, your ultimate destination for hassle-free online shopping! Our state-of-the-art e-commerce platform is designed with a focus on user experience, offering seamless navigation and a wide range of products to explore. Crafted with the latest web technologies, including React, Tailwind CSS, Shadncn UI, and Radix UI, Exclusive ensures a responsive and visually stunning shopping experience across all devices.
 
-## Table of Contents
-
 - [Features](#features)
 - [Technologies We Used](#technologies-we-used)
 - [Deployment](#deployment)
