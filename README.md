@@ -5,7 +5,7 @@ Welcome to Exclusive, your ultimate destination for hassle-free online shopping!
 - [Features](#features)
 - [Technologies We Used](#technologies-we-used)
 - [Deployment](#deployment)
-- [Getting Started](#getting-started)
+- [Getting Started](#getting-started-%EF%B8%8F)
 - [Contributing](#contributing)
 - [License](#license)
 
