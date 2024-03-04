@@ -2,12 +2,12 @@
 
 Welcome to Exclusive, your ultimate destination for hassle-free online shopping! Our state-of-the-art e-commerce platform is designed with a focus on user experience, offering seamless navigation and a wide range of products to explore. Crafted with the latest web technologies, including React, Tailwind CSS, Shadncn UI, and Radix UI, Exclusive ensures a responsive and visually stunning shopping experience across all devices.
 
-- [Features](#features)
-- [Technologies We Used](#technologies-we-used)
-- [Deployment](#deployment)
+- [Features](#features-)
+- [Technologies I Used](#technologies-I-used-)
+- [Deployment](#deployment-)
 - [Getting Started](#getting-started-%EF%B8%8F)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contributing](#contributing-)
+- [License](#license-)
 
 ## Features 🚀
 
@@ -23,7 +23,7 @@ Welcome to Exclusive, your ultimate destination for hassle-free online shopping!
 
 - **Secure Payments**: Shop with confidence knowing that your transactions are secure and protected. Exclusive integrates the trusted Stripe payment gateway, ensuring a safe and reliable payment experience for all users, even during test mode.
 
-## Technologies We Used 💻
+## Technologies I Used 💻
 
 - **React**: Harness the power of React to create dynamic and interactive user interfaces, making the shopping experience more engaging and enjoyable.
 
@@ -73,8 +73,8 @@ Ready to explore the code behind Exclusive? Follow these simple steps to get sta
 
 ## Contributing 🤝
 
-We welcome contributions from the community! If you're interested in contributing to Exclusive, please take a moment to review our [contribution guidelines](CONTRIBUTING.md) to get started.
+I welcome contributions from the community! If you're interested in contributing to Exclusive, please take a moment to review our [contribution guidelines](CONTRIBUTING.md) guidelines to get started.
 
 ## License 📝
 
-This project is licensed under the [MIT License](LICENSE), which means you're free to modify, use, and distribute the code for personal or commercial projects. We simply require you to include the original license and copyright notice in any copy of the project.
+This project is licensed under the [MIT License](LICENSE), which means you're free to modify, use, and distribute the code for personal or commercial projects. I simply require you to include the original license and copyright notice in any copy of the project.
