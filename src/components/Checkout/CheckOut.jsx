@@ -20,7 +20,7 @@ function CheckOut() {
   const { cart, getCart } = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useContext(TokenContext);
-  const rediRectTo = "http://localhost:5173";
+  const rediRectTo = "https://exclusive-two.vercel.app/";
 
   const handleFormSubmit = (values) => {
     setIsLoading(true);
