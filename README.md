@@ -75,6 +75,3 @@ Ready to explore the code behind Exclusive? Follow these simple steps to get sta
 
 I welcome contributions from the community! If you're interested in contributing to Exclusive, please take a moment to review our [contribution guidelines](CONTRIBUTING.md) guidelines to get started.
 
-## License 📝
-
-This project is licensed under the [MIT License](LICENSE), which means you're free to modify, use, and distribute the code for personal or commercial projects. I simply require you to include the original license and copyright notice in any copy of the project.
