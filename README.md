@@ -4,7 +4,7 @@ Welcome to Exclusive, your ultimate destination for hassle-free online shopping!
 
 - [Features](#features-)
 - [Technologies I Used](#technologies-I-used-)
-- [Deployment](#deployment-)
+- [Demo](#deployment-)
 - [Getting Started](#getting-started-%EF%B8%8F)
 - [Contributing](#contributing-)
 - [License](#license-)
@@ -39,7 +39,7 @@ Welcome to Exclusive, your ultimate destination for hassle-free online shopping!
 
 ## Deployment 🚀
 
-Experience the magic of Exclusive by visiting our website at [Insert_Link_Here](#). Whether you're shopping for yourself or searching for the perfect gift, Exclusive has everything you need to make your shopping experience fun, convenient, and memorable.
+Experience the magic by visiting the website [here](#http://exclusive-two.vercel.app)
 
 ## Getting Started 🛠️
 
